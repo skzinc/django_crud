@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dogs App!</title>
+</head>
+<body>
+<h1>Welcome to Dog App!</h1><hr>
+<table border="1">
+    <thead>
+    <th>DOG NAME</th>
+    <th>BREED</th>
+    <th>CREATED AT</th>
+    <th>UPDATED AT</th>
+    <th>Actions</th>
+    </thead>
+
+    <tbody>
+    {% for entry in dogs %}
+    <tr>
+        <td>{{ entry.name }}</td>
+        <td>{{ entry.breed }}</td>
+        <td>{{ entry.created_at }}</td>
+        <td>{{ entry.updated_at }}</td>
+        <td>
+            <form method="post">
+                {% csrf_token %}
+                <input type="submit" formaction="edit/{{entry.id}}" value="EDIT ENTRY">
+                <input type="submit" formaction="delete/{{entry.id}}" value="DELETE ENTRY">
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table><hr>
+<br><br>
+<form><input type="submit" formaction="create/" value="CREATE NEW ENTRY"></form>
+
+</body>
+</html>
